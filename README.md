@@ -1,5 +1,4 @@
 
-yry
 [![C++14](https://img.shields.io/badge/dialect-C%2B%2B14-blue)](https://en.cppreference.com/w/cpp/14)
 [![MIT license](https://img.shields.io/github/license/max0x7ba/atomic_queue)](https://github.com/max0x7ba/atomic_queue/blob/master/LICENSE)
 ![platform Linux 64-bit](https://img.shields.io/badge/platform-Linux%2064--bit-yellow)
@@ -12,7 +11,7 @@ C++14 multiple-producer-multiple-consumer *lockless* queues based on circular bu
 It has been developed, tested and benchmarked on Linux, but should support any C++14 platforms which implement `std::atomic`.
 
 The main design principle these queues follow is _minimalism_: the bare minimum of atomic operations, fixed size buffer, value semantics.
-
+~~~~
 These qualities are also limitations:
 
 * The maximum queue size must be set at compile time or construction time. The circular buffer side-steps the memory reclamation problem inherent in linked-list based queues for the price of fixed buffer size. See [Effective memory reclamation for lock-free data structures in C++][4] for more details. Fixed buffer size may not be that much of a limitation, since once the queue gets larger than the maximum expected size that indicates a problem that elements aren't processed fast enough, and if the queue keeps growing it may eventually consume all available memory which may affect the entire system, rather than the problematic process only. The only apparent inconvenience is that one has to do an upfront back-of-the-envelope calculation on what would be the largest expected/acceptable queue size.
